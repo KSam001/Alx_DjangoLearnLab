@@ -1,4 +1,4 @@
-import os
+nced_features_and_security/settings.pyimport os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
