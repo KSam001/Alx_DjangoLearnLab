@@ -40,7 +40,7 @@ TEMPLATES = [
         },
     },
 ]
-WSGI_APPLICATION = 'advanced_features_and_and_security.wsgi.application'
+WSGI_APPLICATION = 'advanced_features_and_security.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
