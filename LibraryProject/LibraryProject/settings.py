@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'api',
+    'bookshelf',
 ]
 
 MIDDLEWARE = [
@@ -28,7 +29,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'api_project.urls'
+ROOT_URLCONF = 'LibraryProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -45,7 +46,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'api_project.wsgi.application'
+WSGI_APPLICATION = 'LibraryProject.wsgi.application'
 
 DATABASES = {
     'default': {
@@ -84,3 +85,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ]
 }
+
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
