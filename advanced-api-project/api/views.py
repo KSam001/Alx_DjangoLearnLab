@@ -3,12 +3,19 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 from .models import Book
 from .serializers import BookSerializer
 
-class BookListCreateView(generics.ListCreateAPIView):
+class BookListView(generics.ListAPIView):
     """
-    This view handles listing all books and creating a new book.
-    - GET: Lists all books.
-    - POST: Creates a new book instance.
-    Requires authentication for creation, but allows read-only for unauthenticated users.
+    View to list all books.
+    Permissions: Read-only access for all users.
+    """
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+class BookCreateView(generics.CreateAPIView):
+    """
+    View to create a new book.
+    Permissions: Only authenticated users can create.
     """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
@@ -16,9 +23,8 @@ class BookListCreateView(generics.ListCreateAPIView):
 
 class BookDetailView(generics.RetrieveAPIView):
     """
-    This view handles retrieving a single book instance by its ID.
-    - GET: Retrieves a single book.
-    Allows read-only access for all users, regardless of authentication.
+    View to retrieve a single book.
+    Permissions: Read-only access for all users.
     """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
@@ -26,9 +32,8 @@ class BookDetailView(generics.RetrieveAPIView):
 
 class BookUpdateView(generics.UpdateAPIView):
     """
-    This view handles updating an existing book.
-    - PUT/PATCH: Updates a book instance.
-    Requires authentication for all users.
+    View to update an existing book.
+    Permissions: Only authenticated users can update.
     """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
@@ -36,9 +41,8 @@ class BookUpdateView(generics.UpdateAPIView):
 
 class BookDeleteView(generics.DestroyAPIView):
     """
-    This view handles deleting a book instance.
-    - DELETE: Deletes a book instance.
-    Restricts access to only admin users.
+    View to delete a book.
+    Permissions: Only admin users can delete.
     """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
