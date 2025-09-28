@@ -48,7 +48,7 @@ class BookAPIViewTests(APITestCase):
         """
         Ensure we can create a new book as an authenticated user.
         """
-        self.client.force_authenticate(user=self.user)
+        self.client.login(username='testuser', password='testpassword')
         data = {
             'title': 'The Silmarillion',
             'publication_year': 1977,
@@ -63,7 +63,7 @@ class BookAPIViewTests(APITestCase):
         """
         Ensure we can update an existing book as an authenticated user.
         """
-        self.client.force_authenticate(user=self.user)
+        self.client.login(username='testuser', password='testpassword')
         data = {
             'title': 'The Fellowship of the Ring',
             'publication_year': 1954,
@@ -78,7 +78,7 @@ class BookAPIViewTests(APITestCase):
         """
         Ensure we can delete a book as an admin user.
         """
-        self.client.force_authenticate(user=self.admin_user)
+        self.client.login(username='adminuser', password='adminpassword')
         response = self.client.delete(f'/api/books/delete/{self.book1.id}/')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Book.objects.count(), 1)
@@ -117,19 +117,12 @@ class BookAPIViewTests(APITestCase):
         """
         Ensure an unauthenticated user cannot create a book.
         """
-        self.client.force_authenticate(user=None)
-        data = {
-            'title': 'The Silmarillion',
-            'publication_year': 1977,
-            'author': self.author.id
-        }
-        response = self.client.post('/api/books/create/', data, format='json')
+        response = self.client.post('/api/books/create/', {}, format='json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         
     def test_unauthenticated_delete_book_fails(self):
         """
         Ensure an unauthenticated user cannot delete a book.
         """
-        self.client.force_authenticate(user=None)
         response = self.client.delete(f'/api/books/delete/{self.book1.id}/')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
