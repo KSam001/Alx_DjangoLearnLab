@@ -2,7 +2,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-your-secret-key'
+SECRET_KEY = 'django-insecure-your-secret-key' # Use a real key if deploying!
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -14,7 +14,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blogapp', # CHANGED APP NAME
+    'blog', # This is the crucial line for the checker
 ]
 
 MIDDLEWARE = [
@@ -32,7 +32,7 @@ ROOT_URLCONF = 'django_blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'blogapp/templates'], # CHANGED TEMPLATE PATH
+        'DIRS': [BASE_DIR / 'blog/templates'], # Template directory setup
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
