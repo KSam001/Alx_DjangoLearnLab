@@ -6,8 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    # This line is the critical fix: pointing to the correct project folder
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'social_media_api.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_blog.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
